@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	  <meta charset="utf-8">
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <title>Player Profile</title>
+	  <link href="./css/bootstrap-3.3.7.css" rel="stylesheet" type="text/css">
+	  <link href="./css/slider.css" rel="stylesheet" type="text/css">
+	  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  
+  
+  <body>
+  
+	  <div class="container-fluid">
+	  	<div class="row">
+	  		<h1 id="title">Guitarist Profile</h1>
+	  	</div>
+
+		<div class="row">		  
+		  
+		  <div class="col-md-6">
+		  	<div class="row">
+		  		<label class = "question">Enter your name</label>
+				<input type="text" class = "box" id="name">
+		  	</div>
+		  	<div class="row">
+		  		<label class="question">Enter URL of your picture</label>
+				<input type="url" class = "box" id="pic">
+		  	</div>
+			<div class="row">
+				<p class="question" for="amount">1. I play heavey rock</p>
+				<div class="slider" id="slider1"></div>
+				<div class="slider-result" id="result1">Neutral</div>
+				<input type="hidden" id="hidden1" value="3"/>  
+			</div>
+			<div class="row">
+				<label class="question" for="amount">2. I am a lead guitarist</label>
+				<div class="slider" id="slider2"></div>
+				<div class="slider-result" id="result2">Neutral</div>
+				<input type="hidden" id="hidden2" value="3"/>
+			</div>
+			<div class="row">
+				<label class="question" for="amount">3. I like to improvise</label>
+ 				<div class="slider" id="slider3"></div>
+				<div class="slider-result" id="result3">Neutral</div>
+				<input type="hidden" id="hidden3" value="3"/> 
+			</div>
+			<div class="row">
+				<label class="question" for="amount">4. I like to play in alt tunings</label>
+				<div class="slider" id="slider4"></div>
+				<div class="slider-result" id="result4">Neutral</div>
+				<input type="hidden" id="hidden4" value="3"/>
+			</div>
+			<div class="row">
+				<label class="question" for="amount">5. I can also sing</label>
+ 				<div class="slider" id="slider5"></div>
+				<div class="slider-result" id="result5">Neutral</div>
+				<input type="hidden" id="hidden5" value="3"/>
+			</div>
+			<div class="row">
+				<label class="question" for="amount">6. I am proficient at acoustic guitar</label>
+ 				<div class="slider" id="slider6"></div>
+				<div class="slider-result" id="result6">Neutral</div>
+				<input type="hidden" id="hidden6" value="3"/>
+			</div>
+			<div class="row">
+				<label class="question" for="amount">7. I use alot of FX pedals</label>
+ 				<div class="slider" id="slider7"></div>
+				<div class="slider-result" id="result7">Neutral</div>
+				<input type="hidden" id="hidden7" value="3"/>
+			</div>
+			<div class="row">
+				<label class="question" for="amount">8. I excel at sweep picking</label>
+ 				<div class="slider" id="slider8"></div>
+				<div class="slider-result" id="result8">Neutral</div>
+				<input type="hidden" id="hidden8" value="3"/>
+			</div>
+			<div class="row">
+				<label class="question" for="amount">9. Ritchie Blackmore is my role model</label>
+ 				<div class="slider" id="slider9"></div>
+				<div class="slider-result" id="result9">Neutral</div>
+				<input type="hidden" id="hidden9" value="3"/>
+			</div>
+			<div class="row">
+				<label class="question" for="amount">10. The guitarist, not the singer, is the true rock hero</label>
+ 				<div class="slider" id="slider10"></div>
+				<div class="slider-result" id="result10">Neutral</div>
+				<input type="hidden" id="hidden10" value="3"/>
+			</div>
+
+			<button class="submit btn btn-primary" type="submit" data-toggle="modal" data-target="#openModal">Submit</button>
+
+
+			<a href="#openModal">Open Modal</a>
+			<div id="openModal" class="modalDialog">
+				<div>	
+					<a href="#close" title="Close" class="close">X</a>
+					<h2 id="bandName"> Your New Band</h2>
+					<img id="banPic" src="assets/coops-band.jpg" width="250" alt="band photo">		
+				</div>				
+			  </div>
+				  
+		</div>
+		  <div class="col-md-6">
+		  <img src="assets/topspacer.jpg" class="img-responsive" alt="space">
+		  <img src="assets/Rudolph-Schenker.jpg" class="img-responsive" alt="Rudolph Schenker">
+		  <img src="assets/spacer.jpg" class="img-responsive" alt="space">
+		  <img src="assets/Michael-Schenker.jpg" class="img-responsive" alt="Michael Schenker">
+		  </div>
+		</div>
+	  </div>
+  
+  	
+  
+   <script>
+	
+	 $(".submit").on("click", (event)=> {
+		 event.preventDefault();
+		 
+		 var newPlayer = {
+			 name: 	$("#name").val().trim(),
+		     photo: $("#pic").val().trim(),
+			 scores:[$("#hidden1").val().trim(), $("#hidden2").val().trim(), $("#hidden3").val().trim(), $("#hidden4").val().trim(), $("#hidden5").val().trim(), $("#hidden6").val().trim(), $("#hidden7").val().trim(), $("#hidden8").val().trim(), $("#hidden9").val().trim(), $("#hidden10").val().trim()]
+		 };
+		 
+		  console.log(newPlayer);
+
+		 	//displays matching friends's name and photo
+          	// $("#openModal").text(data.name);
+          	// $("#bestFriendI").attr("src", data.photo);
+
+          	 $.post("/api/bands", newBand, (data)=>{
+			   $("#openModal").modal("toggle");
+			 })
+          	
+          
+          	//clears input fields
+          	$("#name").val("");
+          	$("#pic").val("");
+
+        });
+
+    
+		 	 
+	var steps = [
+	"0",	
+    "Strongly Disagree",
+    "Somewhat Disagree",
+    "Nuetral",
+    "Somewhat Agree",
+    "Strongly Agree"
+];
+	   
+  $(()=> {
+		$( "#slider1" ).slider({
+		  value:3,
+		  min: 1,
+		  max: 5,
+		  step: 1,
+		  slide:( event, ui)=> {
+			 $("#result1" ).html(steps[ui.value]);
+		  },
+		  change:(event, ui)=> { 
+			 $('#hidden1').attr('value', ui.value);
+		  }	
+	   });
+ });
+	 
+  $(()=> {
+		$( "#slider2" ).slider({
+		  value:3,
+		  min: 1,
+		  max: 5,
+		  step: 1,
+		  slide:( event, ui)=> {
+			 $("#result2" ).html(steps[ui.value]);
+		  },
+		  change:(event, ui)=> { 
+			 $('#hidden2').attr('value', ui.value);
+		  }	
+	   });
+ });
+
+  $(()=> {
+		$( "#slider3" ).slider({
+		  value:3,
+		  min: 1,
+		  max: 5,
+		  step: 1,
+		  slide:( event, ui)=> {
+			 $("#result3" ).html(steps[ui.value]);
+		  },
+		  change:(event, ui)=> { 
+			 $('#hidden3').attr('value', ui.value);
+		  }	
+	   });
+ });
+
+  $(()=> {
+		$( "#slider4" ).slider({
+		  value:3,
+		  min: 1,
+		  max: 5,
+		  step: 1,
+		  slide:( event, ui)=> {
+			 $("#result4" ).html(steps[ui.value]);
+		  },
+		  change:(event, ui)=> { 
+			 $('#hidden4').attr('value', ui.value);
+		  }	
+	   });
+ });
+
+  $(()=> {
+		$( "#slider5" ).slider({
+		  value:3,
+		  min: 1,
+		  max: 5,
+		  step: 1,
+		  slide:( event, ui)=> {
+			 $("#result5" ).html(steps[ui.value]);
+		  },
+		  change:(event, ui)=> { 
+			 $('#hidden5').attr('value', ui.value);
+		  }	
+	   });
+ });
+
+  $(()=> {
+		$( "#slider6" ).slider({
+		  value:3,
+		  min: 1,
+		  max: 5,
+		  step: 1,
+		  slide:( event, ui)=> {
+			 $("#result6" ).html(steps[ui.value]);
+		  },
+		  change:(event, ui)=> { 
+			 $('#hidden6').attr('value', ui.value);
+		  }	
+	   });
+ });
+
+  $(()=> {
+		$( "#slider7" ).slider({
+		  value:3,
+		  min: 1,
+		  max: 5,
+		  step: 1,
+		  slide:( event, ui)=> {
+			 $("#result7" ).html(steps[ui.value]);
+		  },
+		  change:(event, ui)=> { 
+			 $('#hidden7').attr('value', ui.value);
+		  }	
+	   });
+ });
+
+  $(()=> {
+		$( "#slider8" ).slider({
+		  value:3,
+		  min: 1,
+		  max: 5,
+		  step: 1,
+		  slide:( event, ui)=> {
+			 $("#result8" ).html(steps[ui.value]);
+		  },
+		  change:(event, ui)=> { 
+			 $('#hidden8').attr('value', ui.value);
+		  }	
+	   });
+ });
+
+  $(()=> {
+		$( "#slider9" ).slider({
+		  value:3,
+		  min: 1,
+		  max: 5,
+		  step: 1,
+		  slide:( event, ui)=> {
+			 $("#result9" ).html(steps[ui.value]);
+		  },
+		  change:(event, ui)=> { 
+			 $('#hidden9').attr('value', ui.value);
+		  }	
+	   });
+ });
+
+  $(()=> {
+		$( "#slider10" ).slider({
+		  value:3,
+		  min: 1,
+		  max: 5,
+		  step: 1,
+		  slide:( event, ui)=> {
+			 $("#result10" ).html(steps[ui.value]);
+		  },
+		  change:(event, ui)=> { 
+			 $('#hidden10').attr('value', ui.value);
+		  }	
+	   });
+ });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	  <meta charset="utf-8">
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <title>Band Profile</title>
+	  <link href="css/bootstrap-3.3.7.css" rel="stylesheet" type="text/css">
+	  <link href="css/slider.css" rel="stylesheet" type="text/css">
+	  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	  
+  </head>
+  
+  
+  <body>
+  
+  <div class="container-fluid">
+	  	<div class="row">
+	  		<h1 id="title">Band Profile</h1>
+	  	</div>
+
+		<div class="row">
+		  <div class="col-md-6">
+		  	<div class="row">
+		  		<label for="name" class = "question">Band name</label>
+					<input type="text" class ="box" id="name" name= "name">
+		  	</div>
+		  	<div class="row">
+		  		<label for="pic"class="question">Enter URL of band's picture</label>
+					<input type="url" class = "box" id="pic" name = "picture">
+		  	</div>
+			<div class="row">
+				<p class="question" for="liker1">1. We play heavey rock</p>
+				 <ul class="likert">
+					  <li>
+						<input type="radio" name="likert1" value= 1>
+						<label>Strongly Disagree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert1" value= 2>
+						<label>Somewhat Disagree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert1" checked="checked" value= 3>
+						<label>Neutral</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert1" value= 4>
+						<label>Somewhat Agree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert1" value= 5>
+						<label>Strongly Agree</label>
+					  </li>
+			  </ul>  
+			</div>
+			  
+			<div class="row">
+				<label class="question" for="likert2">2. We need a lead guitarist</label>
+				<ul class="likert">
+					  <li>
+						<input type="radio" name="likert2" value= 1>
+						<label>Strongly Disagree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert2" value= 2>
+						<label>Somewhat Disagree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert2" checked="checked" value= 3>
+						<label>Neutral</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert2" value= 4>
+						<label>Somewhat Agree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert2" value= 5>
+						<label>Strongly Agree</label>
+					  </li>
+			  </ul>  
+			</div>
+			<div class="row">
+				<label class="question" for="likert3">3. The band likes to improvise</label>
+ 				<ul class="likert">
+					  <li>
+						<input type="radio" name="likert3" value= 1>
+						<label>Strongly Disagree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert3" value= 2>
+						<label>Somewhat Disagree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert3" checked="checked" value= 3>
+						<label>Neutral</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert3" value= 4>
+						<label>Somewhat Agree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert3" value= 5>
+						<label>Strongly Agree</label>
+					  </li>
+			  </ul>  
+			</div>
+			<div class="row">
+				<label class="question" for="likert4">4. We play a lot of songs in alt tunings</label>
+				<ul class="likert">
+					  <li>
+						<input type="radio" name="likert4" value= 1>
+						<label>Strongly Disagree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert4" value= 2>
+						<label>Somewhat Disagree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert4" checked="checked" value= 3>
+						<label>Neutral</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert4" value= 4>
+						<label>Somewhat Agree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert4" value= 5>
+						<label>Strongly Agree</label>
+					  </li>
+			  </ul>  
+			</div>
+			<div class="row">
+				<label class="question" for="likert5">5. We are looking for a guitarist who can sing</label>
+ 				<ul class="likert">
+					  <li>
+						<input type="radio" name="likert5" value= 1>
+						<label>Strongly Disagree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert5" value= 2>
+						<label>Somewhat Disagree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert5" checked="checked" value= 3>
+						<label>Neutral</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert5" value= 4>
+						<label>Somewhat Agree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert5" value= 5>
+						<label>Strongly Agree</label>
+					  </li>
+			  </ul>  
+			</div>
+			<div class="row">
+				<label class="question" for="likert6">6. We have a lot of number that call for acoustic guitar</label>
+ 				<ul class="likert">
+					  <li>
+						<input type="radio" name="likert6" value= 1>
+						<label>Strongly Disagree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert6" value= 2>
+						<label>Somewhat Disagree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert6" checked="checked" value= 3>
+						<label>Neutral</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert6" value= 4>
+						<label>Somewhat Agree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert6" value= 5>
+						<label>Strongly Agree</label>
+					  </li>
+			  </ul>  
+			</div>
+			<div class="row">
+				<label class="question" for="likert7">7. The axeman must be proficent with special effects</label>
+ 				<ul class="likert">
+					  <li>
+						<input type="radio" name="likert7" value= 1>
+						<label>Strongly Disagree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert7" value= 2>
+						<label>Somewhat Disagree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert7" checked="checked" value= 3>
+						<label>Neutral</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert7" value= 4>
+						<label>Somewhat Agree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert7" value= 5>
+						<label>Strongly Agree</label>
+					  </li>
+			  </ul>  
+			</div>
+			<div class="row">
+				<label class="question" for="likert8">8. We are looking for a schredder</label>
+ 				<ul class="likert">
+					  <li>
+						<input type="radio" name="likert8" value= 1>
+						<label>Strongly Disagree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert8" value= 2>
+						<label>Somewhat Disagree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert8" checked="checked" value= 3>
+						<label>Neutral</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert8" value= 4>
+						<label>Somewhat Agree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert8" value= 5>
+						<label>Strongly Agree</label>
+					  </li>
+			  </ul>  
+			</div>
+			<div class="row">
+				<label class="question" for="likert9">9. We are looking for a player inspired by Ritchie Blackmore</label>
+ 				<ul class="likert">
+					  <li>
+						<input type="radio" name="likert9" value= 1>
+						<label>Strongly Disagree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert9" value= 2>
+						<label>Somewhat Disagree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert9" checked="checked" value= 3>
+						<label>Neutral</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert9" value= 4>
+						<label>Somewhat Agree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert9" value= 5>
+						<label>Strongly Agree</label>
+					  </li>
+			  </ul>  
+			</div>
+			<div class="row">
+				<label class="question" for="likert10">10. The band is looking for a player who is not egotistical</label>
+ 				<ul class="likert">
+					  <li>
+						<input type="radio" name="likert10" value= 1>
+						<label>Strongly Disagree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert10" value= 2>
+						<label>Somewhat Disagree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert10" checked="checked" value= 3>
+						<label>Neutral</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert10" value= 4>
+						<label>Somewhat Agree</label>
+					  </li>
+					  <li>
+						<input type="radio" name="likert10" value= 5>
+						<label>Strongly Agree</label>
+					  </li>
+			  </ul>  
+			</div>
+					<button class="submit btn btn-primary">Submit</button>
+
+			<a href="#openModal">Open Modal</a>
+
+			<div id="openModal" class="modalDialog">
+    		<div>	
+        		<a href="#close" title="Close" class="close">X</a>
+
+        		<h2 id="bandName"> <h2>
+						<img id="banPic" src="assets/coops-band.jpg" alt="band photo">		
+        		
+    		</div>
+</div>
+		  </div>
+		  <div class="col-md-6">
+		  <img src="assets/topspacer.jpg" class="img-responsive" alt="space">
+		  <img src="assets/coops-band.jpg" class="img-responsive" alt="Rudolph Schenker">
+		  <img src="assets/spacer.jpg" class="img-responsive" alt="space">
+			<img src="assets/Dio-Appacie.jpg" class="img-responsive" alt="Heaven & Hell">
+			<img src="assets/spacer.jpg" class="img-responsive" alt="space">
+			<img src="assets/kottack.jpg" class="img-responsive" alt="space">
+		  </div>
+		</div>
+  </div>
+  
+  <script>
+	 $(".submit").on("click", (event)=> {
+		 event.preventDefault();
+		 
+		 var newband = {
+			 name: 		$("#name").val().trim(),
+		   photo: 	$("#pic").val().trim(),
+			 scores:	[$("#likert1").buttonset(), $("#likert2").buttonset(), $("#likert3").buttonset(), $("#likert4").buttonset(), $("#likert5").buttonset(), $("#likert6").buttonset(), $("#likert7").buttonset(), $("#likert8").buttonset(), $("#likert9").buttonset(), $("#likert10").buttonset()]
+		 };
+		 
+		  console.log(newBand);
+
+		  $.post("/api/bands", newBand, (data)=>{
+			  alert("We'll match you with a band");       	
+        });
+    }) 
+		
+
+
+		
+</script>
+</body>
+</html>
