@@ -8,7 +8,8 @@
 	  <link href="css/bootstrap-3.3.7.css" rel="stylesheet" type="text/css">
 	  <link href="css/style.css" rel="stylesheet" type="text/css">
 	  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
 	  
   </head>
   
@@ -28,7 +29,7 @@
 		  	</div>
 		  	<div class="row">
 		  		<label for="pic"class="question">Enter URL of band's picture</label>
-					<input type="url" class = "box" id="pic" name = "picture">
+					<input type="url" class = "box" id="photo" name="picture">
 		  	</div>
 			<div class="row">
 				<p class="question" for="liker1">1. We play heavey rock</p>
@@ -312,26 +313,26 @@
   </div>
   
   <script>
-		userScores = [];
+		surveyScores = [];
 	 $(".submit").on("click", (event)=> {
 		 event.preventDefault();
 		 
 		 var newSurvey = {
 			 name: 	$("#name").val().trim(),
-			 photo: $("#pic").val().trim(),
-			 scores:[$("input[name='likert1']"), $("#likert2").buttonset(), $("#likert3").buttonset(), 				$("#likert4").buttonset(), $("#likert5").buttonset(), $("#likert6").buttonset(), $("#likert7").buttonset(), $("#likert8").buttonset(), $("#likert9").buttonset(), $("#likert10").buttonset()]
+			 photo: $("#photo").val().trim(),
+			 scores:[$("input[name='likert1']:checked").val().trim(), $('input[name=likert2]:checked').val().trim(), $('input[name=likert3]:checked').val().trim(), $("input[name='likert4']:checked").val().trim(), $('input[name=likert5]:checked').val().trim(), $('input[name=likert6]:checked').val().trim(), $("input[name='likert7']:checked").val().trim(), $('input[name=likert8]:checked').val().trim(), $('input[name=likert9]:checked').val().trim(), $("input[name='likert10']:checked").val().trim()]
 		 };
 		 
-		  console.log(newSurvey);
+		  console.log(newSurvey); 
 
 		 console.log("Survey says  " + JSON.stringify(newSurvey));
 
 		$.post("/api/survey", newSurvey);
 				  
 		$.get("/api/survey", function(data) {
-				userScores = data[0].scores
+				surveyScores = data[0].scores
 				console.log(data[0].name);
-				console.log(userScores);
+				console.log(surveyScores);
 		        
          	
 		});
@@ -343,7 +344,7 @@
 			for (i=0; i < data.length; i++) {
 				var score = 0
 				for (j=0; j < 10; j++) {
-				score += Math.abs(Number(userScores[j]) - Number(data[i].scores[j]));			
+				score += Math.abs(Number(surveyScores[j]) - Number(data[i].scores[j]));			
 				}
 				console.log(data[i].name, score);
 				if (score <  lowScore) {
@@ -359,10 +360,6 @@
 		})
 
 	 });
-	
-		
-
-
 		
 </script>
 </body>

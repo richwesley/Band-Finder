@@ -125,7 +125,7 @@
   	
   
    <script>
-	   userScores =[];
+	   surveyScores =[];
 	
 	 $(".submit").on("click", (event)=> {
 		event.preventDefault();
@@ -141,9 +141,9 @@
 		$.post("/api/survey", newSurvey);
 				  
 		$.get("/api/survey", function(data) {
-				userScores = data[0].scores
+				surveyScores = data[0].scores
 				console.log(data[0].name);
-				console.log(userScores);
+				console.log(surveyScores);
 		        
          	
 		});
@@ -155,7 +155,7 @@
 			for (i=0; i < data.length; i++) {
 				var score = 0
 				for (j=0; j < 10; j++) {
-				score += Math.abs(Number(userScores[j]) - Number(data[i].scores[j]));			
+				score += Math.abs(Number(surveyScores[j]) - Number(data[i].scores[j]));			
 				}
 				console.log(data[i].name, score);
 				if (score <  lowScore) {

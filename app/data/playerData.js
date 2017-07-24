@@ -6,7 +6,7 @@ var playerArray = [
     },
      {
         name : "Scott Vargus",
-        photo : "https://http://free-extras.com/img/pics/images/g/guitar_player-12051.jpg",
+        photo : "http://store.drumbum.com/media/monster-guitar-player.jpg",
         scores : [3,5,1,2,3,3,5,2,4,4]
     },
     {
