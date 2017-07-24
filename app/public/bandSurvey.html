@@ -6,7 +6,7 @@
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <title>Band Profile</title>
 	  <link href="css/bootstrap-3.3.7.css" rel="stylesheet" type="text/css">
-	  <link href="css/slider.css" rel="stylesheet" type="text/css">
+	  <link href="css/style.css" rel="stylesheet" type="text/css">
 	  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	  
@@ -42,7 +42,7 @@
 						<label>Somewhat Disagree</label>
 					  </li>
 					  <li>
-						<input type="radio" name="likert1" checked="checked" value= 3>
+						<input type="radio" name="likert1" checked value= 3>
 						<label>Neutral</label>
 					  </li>
 					  <li>
@@ -281,19 +281,24 @@
 					  </li>
 			  </ul>  
 			</div>
-					<button class="submit btn btn-primary">Submit</button>
+					<button class="submit btn btn-primary" type="submit">Submit</button>
 
-			<a href="#openModal">Open Modal</a>
-
-			<div id="openModal" class="modalDialog">
-    		<div>	
-        		<a href="#close" title="Close" class="close">X</a>
-
-        		<h2 id="bandName"> <h2>
-						<img id="banPic" src="assets/coops-band.jpg" alt="band photo">		
-        		
-    		</div>
-</div>
+				  <!--modal-->
+    <div id="openModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog"> 
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close closeModal" data-dismiss="modal" id="closeModal"> <span id="x"> &times; </span> </button>
+                    <h2 class="modal-title"> Your New Guitarist </h2>
+                </div>
+                <div class="modal-body">
+					<h2 id="surveySays"></h2>
+					<img id="surveyShows" width="400">					
+                </div>
+            </div>
+				</div>
+					
+    </div>
 		  </div>
 		  <div class="col-md-6">
 		  <img src="assets/topspacer.jpg" class="img-responsive" alt="space">
@@ -307,21 +312,54 @@
   </div>
   
   <script>
+		userScores = [];
 	 $(".submit").on("click", (event)=> {
 		 event.preventDefault();
 		 
-		 var newband = {
-			 name: 		$("#name").val().trim(),
-		   photo: 	$("#pic").val().trim(),
-			 scores:	[$("#likert1").buttonset(), $("#likert2").buttonset(), $("#likert3").buttonset(), $("#likert4").buttonset(), $("#likert5").buttonset(), $("#likert6").buttonset(), $("#likert7").buttonset(), $("#likert8").buttonset(), $("#likert9").buttonset(), $("#likert10").buttonset()]
+		 var newSurvey = {
+			 name: 	$("#name").val().trim(),
+			 photo: $("#pic").val().trim(),
+			 scores:[$("input[name='likert1']"), $("#likert2").buttonset(), $("#likert3").buttonset(), 				$("#likert4").buttonset(), $("#likert5").buttonset(), $("#likert6").buttonset(), $("#likert7").buttonset(), $("#likert8").buttonset(), $("#likert9").buttonset(), $("#likert10").buttonset()]
 		 };
 		 
-		  console.log(newBand);
+		  console.log(newSurvey);
 
-		  $.post("/api/bands", newBand, (data)=>{
-			  alert("We'll match you with a band");       	
-        });
-    }) 
+		 console.log("Survey says  " + JSON.stringify(newSurvey));
+
+		$.post("/api/survey", newSurvey);
+				  
+		$.get("/api/survey", function(data) {
+				userScores = data[0].scores
+				console.log(data[0].name);
+				console.log(userScores);
+		        
+         	
+		});
+
+		$.get("/api/players", function (data) {
+			var lowScore = 50;
+			var bestBand;
+			;
+			for (i=0; i < data.length; i++) {
+				var score = 0
+				for (j=0; j < 10; j++) {
+				score += Math.abs(Number(userScores[j]) - Number(data[i].scores[j]));			
+				}
+				console.log(data[i].name, score);
+				if (score <  lowScore) {
+					lowScore = score;
+					bestBand = data[i].name;
+					bestPhoto = data[i].photo;
+				}
+			}
+			console.log("The low score " + bestBand);
+				$("#surveySays").text(bestBand);
+         		$("#surveyShows").attr("src", bestPhoto);    		
+		   		$("#openModal").modal('toggle');
+		})
+
+	 });
+	
 		
 
 

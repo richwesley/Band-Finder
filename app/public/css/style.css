@@ -1,15 +1,20 @@
 @charset "utf-8";
 /* CSS Document */
+
+body{
+background:url(bg.jpg)!important;
+padding:100px 50px 0px 50px;
+}
+
 #container{
-/*background:url( ../assets/bg.jpg)!important;*/
 padding:100px 50px 0px 50px;
 }
 
 /*the slider background*/
 .slider {
-	width: 380px;
+	width: 300px;
 	height: 9px;
-	background: url( ../assets/slider.png);
+	background: url( ../assets/slider-bg.png);
 	position: relative;
 	margin-top: 15px;
 	margin-bottom: 10px;
@@ -78,12 +83,11 @@ background:url(../assets/slider-button.png);
 
 /*This is the fill bar colour*/
 .ui-widget-header {
-	background: url(../assets/fill.png) no-repeat left;
+	background:url(../assets/fill.png) no-repeat left;
 	height: 9px;
 	left: 1px;
-	top: 0px;
+	top: 1px;
 	position: absolute;
-	border-radius: 13px;
 }
 
 a {
@@ -99,13 +103,11 @@ outline:none;
 	min-height: 26px;
 	margin-bottom: 18px;
 }
-.pic {
+.photo {
 	margin-left: 82px;
 
 }
-#header {
 
-}
 #title {
 	font-weight: 700;
 	font-size: 50px;

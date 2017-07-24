@@ -6,10 +6,10 @@
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <title>Player Profile</title>
 	  <link href="./css/bootstrap-3.3.7.css" rel="stylesheet" type="text/css">
-	  <link href="./css/slider.css" rel="stylesheet" type="text/css">
 	  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  <link href="./css/style.css" rel="stylesheet" type="text/css">	
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   
@@ -30,7 +30,7 @@
 		  	</div>
 		  	<div class="row">
 		  		<label class="question">Enter URL of your picture</label>
-				<input type="url" class = "box" id="pic">
+				<input type="url" class = "box" id="photo">
 		  	</div>
 			<div class="row">
 				<p class="question" for="amount">1. I play heavey rock</p>
@@ -93,18 +93,25 @@
 				<input type="hidden" id="hidden10" value="3"/>
 			</div>
 
-			<button class="submit btn btn-primary" type="submit" data-toggle="modal" data-target="#openModal">Submit</button>
-
-
-			<a href="#openModal">Open Modal</a>
-			<div id="openModal" class="modalDialog">
-				<div>	
-					<a href="#close" title="Close" class="close">X</a>
-					<h2 id="bandName"> Your New Band</h2>
-					<img id="banPic" src="assets/coops-band.jpg" width="250" alt="band photo">		
-				</div>				
-			  </div>
+			<button class="submit btn btn-primary" type="submit">Submit</button>
 				  
+			  <!--modal-->
+    <div id="openModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog"> 
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close closeModal" data-dismiss="modal" id="closeModal"> <span id="x"> &times; </span> </button>
+                    <h2 class="modal-title"> Your New Band </h2>
+                </div>
+                <div class="modal-body">
+					<h2 id="surveySays"></h2>
+					<img id="surveyShows" width="400">					
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 		</div>
 		  <div class="col-md-6">
 		  <img src="assets/topspacer.jpg" class="img-responsive" alt="space">
@@ -118,33 +125,53 @@
   	
   
    <script>
+	   userScores =[];
 	
 	 $(".submit").on("click", (event)=> {
-		 event.preventDefault();
+		event.preventDefault();
 		 
-		 var newPlayer = {
+		 var newSurvey = {
 			 name: 	$("#name").val().trim(),
-		     photo: $("#pic").val().trim(),
+		     photo: $("#photo").val().trim(),
 			 scores:[$("#hidden1").val().trim(), $("#hidden2").val().trim(), $("#hidden3").val().trim(), $("#hidden4").val().trim(), $("#hidden5").val().trim(), $("#hidden6").val().trim(), $("#hidden7").val().trim(), $("#hidden8").val().trim(), $("#hidden9").val().trim(), $("#hidden10").val().trim()]
 		 };
 		 
-		  console.log(newPlayer);
+		console.log("Survey says  " + JSON.stringify(newSurvey));
 
-		 	//displays matching friends's name and photo
-          	// $("#openModal").text(data.name);
-          	// $("#bestFriendI").attr("src", data.photo);
+		$.post("/api/survey", newSurvey);
+				  
+		$.get("/api/survey", function(data) {
+				userScores = data[0].scores
+				console.log(data[0].name);
+				console.log(userScores);
+		        
+         	
+		});
 
-          	 $.post("/api/bands", newBand, (data)=>{
-			   $("#openModal").modal("toggle");
-			 })
-          	
-          
-          	//clears input fields
-          	$("#name").val("");
-          	$("#pic").val("");
+		$.get("/api/bands", function (data) {
+			var lowScore = 50;
+			var bestBand;
+			;
+			for (i=0; i < data.length; i++) {
+				var score = 0
+				for (j=0; j < 10; j++) {
+				score += Math.abs(Number(userScores[j]) - Number(data[i].scores[j]));			
+				}
+				console.log(data[i].name, score);
+				if (score <  lowScore) {
+					lowScore = score;
+					bestBand = data[i].name;
+					bestPhoto = data[i].photo;
+				}
+			}
+			console.log("The low score " + bestBand);
+				$("#surveySays").text(bestBand);
+         		$("#surveyShows").attr("src", bestPhoto);    		
+		   		$("#openModal").modal('toggle');
+		})
 
-        });
-
+	 });
+	
     
 		 	 
 	var steps = [
@@ -158,6 +185,8 @@
 	   
   $(()=> {
 		$( "#slider1" ).slider({
+		  animate: true,
+		  range: "min",			
 		  value:3,
 		  min: 1,
 		  max: 5,
@@ -173,6 +202,8 @@
 	 
   $(()=> {
 		$( "#slider2" ).slider({
+		  animate: true,
+		  range: "min",		
 		  value:3,
 		  min: 1,
 		  max: 5,
@@ -182,12 +213,14 @@
 		  },
 		  change:(event, ui)=> { 
 			 $('#hidden2').attr('value', ui.value);
-		  }	
+		  }  
 	   });
  });
 
   $(()=> {
 		$( "#slider3" ).slider({
+		  animate: true,
+		  range: "min",		
 		  value:3,
 		  min: 1,
 		  max: 5,
@@ -203,6 +236,8 @@
 
   $(()=> {
 		$( "#slider4" ).slider({
+		  range: "min",	
+		  animate: true,	
 		  value:3,
 		  min: 1,
 		  max: 5,
@@ -218,6 +253,8 @@
 
   $(()=> {
 		$( "#slider5" ).slider({
+		  range: "min",	
+		  animate: true,	
 		  value:3,
 		  min: 1,
 		  max: 5,
@@ -233,6 +270,8 @@
 
   $(()=> {
 		$( "#slider6" ).slider({
+		  range: "min",	 
+          animate: true,
 		  value:3,
 		  min: 1,
 		  max: 5,
@@ -248,7 +287,9 @@
 
   $(()=> {
 		$( "#slider7" ).slider({
-		  value:3,
+		  range: "min",	
+		  animate: true,	
+		  value:3,  
 		  min: 1,
 		  max: 5,
 		  step: 1,
@@ -263,6 +304,8 @@
 
   $(()=> {
 		$( "#slider8" ).slider({
+		  range: "min",	
+		  animate: true,	
 		  value:3,
 		  min: 1,
 		  max: 5,
@@ -278,6 +321,8 @@
 
   $(()=> {
 		$( "#slider9" ).slider({
+		  range: "min",	
+		  animate: true,	
 		  value:3,
 		  min: 1,
 		  max: 5,
@@ -293,6 +338,8 @@
 
   $(()=> {
 		$( "#slider10" ).slider({
+		  range: "min",		
+		  animate: true,	
 		  value:3,
 		  min: 1,
 		  max: 5,

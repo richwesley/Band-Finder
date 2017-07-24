@@ -4,6 +4,7 @@
 
 var playerData = require("../data/playerData");
 var bandData = require("../data/bandData");
+var surveyData = require("../data/surveyData");
 //console.log(playerData);
 
 // ===============================================================================
@@ -20,14 +21,16 @@ module.exports = (app)=> {
     res.json(bandData);
   });
 
-  // API POST Requests
-  app.post("/api/players", (req, res) => {
-      playerData.push(req.body);
-      res.json(true);
-    })
+  app.get("/api/survey", (req, res) => {
+    res.json(surveyData);
+  
+  });
 
-  app.post("/api/bands", (req, res) => {
-      bandData.push(req.body);
-      res.json(true);
-    })    
-} 
+    app.post("/api/survey", (req, res) => {
+      surveyData.push(req.body);
+      
+  });
+
+    
+}
+
